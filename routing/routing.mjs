@@ -10,6 +10,7 @@ const server = createServer((req, res) => {
     res.write("<head><title>Home</title></head>");
     res.write("<body>");
     res.write("<h1>Welcome to the Home Page!</h1>");
+    res.write("check about page also");
     res.write("</body>");
     res.write("</html>");
   } else if (req.url === "/about") {
