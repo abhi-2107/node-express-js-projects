@@ -1,8 +1,1 @@
-[
-    {
-        "houseName": "villa 7",
-        "price": "9999",
-        "location": "jaipur",
-        "rating": "5",
-        "photoUrl": "dfdfdfdfdfdfdf"
-    }]
+[{"houseName":"villa 7","price":"9999","location":"jaipur","rating":"5","photoUrl":"dfdfdfdfdfdfdf"},{"houseName":"villa 8","price":"8999","location":"bsw","rating":"4","photoUrl":"dfdfdfdfdfdfdf"}]

@@ -1,6 +1,5 @@
 import express, { urlencoded } from "express";
 import path from "path";
-import { fileURLToPath } from "url";
 import hostRouter from "./routes/hostRouter.js";
 import { pageNotFound } from "./controllers/errorController.js";
 import { storeRouter } from "./routes/storeRouter.js";
