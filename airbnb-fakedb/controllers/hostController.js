@@ -1,4 +1,4 @@
-import { Home } from "../models/Home.js";
+import { Home } from "../models/home.js";
 
 export const getAddHome = (req, res, next) => {
   res.render("host/add-home", {

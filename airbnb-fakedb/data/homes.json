@@ -1,1 +1,34 @@
-[{"houseName":"villa 7","price":"9999","location":"jaipur","rating":"5","photoUrl":"dfdfdfdfdfdfdf"},{"houseName":"villa 8","price":"8999","location":"bsw","rating":"4","photoUrl":"dfdfdfdfdfdfdf"}]
+[
+    {
+        "id": "1",
+        "houseName": "villa 7",
+        "price": "9999",
+        "location": "jaipur",
+        "rating": "5",
+        "photoUrl": "https://img.freepik.com/free-photo/3d-rendering-loft-luxury-living-room-with-bookshelf-near-bookshelf_105762-2224.jpg?ga=GA1.1.1466768952.1746103724&semt=ais_items_boosted&w=740"
+    },
+    {
+        "id": "2",
+        "houseName": "villa 8",
+        "price": "8999",
+        "location": "bsw",
+        "rating": "4",
+        "photoUrl": "https://img.freepik.com/premium-photo/elegant-suburban-red-brick-home-with-landscaped-lawn-eyelevel-view_501731-16363.jpg?ga=GA1.1.1466768952.1746103724&semt=ais_items_boosted&w=740"
+    },
+    {
+        "houseName": "villa 9",
+        "price": "7999",
+        "location": "udaipur",
+        "rating": "3",
+        "photoUrl": "https://img.freepik.com/free-photo/house-with-blue-roof-blue-roof_188544-7699.jpg?ga=GA1.1.1466768952.1746103724&semt=ais_items_boosted&w=740",
+        "id": "0.9986347245263003"
+    },
+    {
+        "houseName": "villa 10",
+        "price": "5999",
+        "location": "jaipur",
+        "rating": "5",
+        "photoUrl": "https://img.freepik.com/premium-photo/residential-family-house-with-concrete-pathway-green-lawn-front-yard_769578-2434.jpg?ga=GA1.1.1466768952.1746103724&semt=ais_items_boosted&w=740",
+        "id": "0.058766973569912784"
+    }
+]
