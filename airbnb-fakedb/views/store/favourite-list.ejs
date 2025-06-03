@@ -22,7 +22,14 @@
                   <span class="text-gray-700"><%= home.rating %></span>
                 </div>
               </div>
-              <button class="bg-green-300 p-2">Book</button>
+              <div>
+                <form action="/favourites/delete/<%= home.id %>" method="POST" class="inline-block">
+                  <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300 cursor-pointer">
+                    Remove from Favourites
+                  </button>
+                </form>
+
+              </div>
             </div>
           </div>
         <% }) %>

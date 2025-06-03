@@ -31,10 +31,9 @@ export const getBookings = (req, res, next) => {
 export const getFavouriteList = (req, res, next) => {
   Favourite.getFavourites((favHomeIds) => {
     Home.fetchAll((registeredHomes) => {
-      const favHomeDetails = favHomeIds.map((favid) =>
-        registeredHomes.find((home) => home.id === favid)
+      const favHomeDetails = registeredHomes.filter((home) =>
+        favHomeIds.includes(home.id)
       );
-
       res.render("store/favourite-list", {
         favouriteHomes: favHomeDetails,
         pageTitle: "My Favourites",
@@ -43,6 +42,16 @@ export const getFavouriteList = (req, res, next) => {
     });
   });
 };
+
+// export const postDeleteFavourites = (req, res, next) => {
+//   const homeId = req.params.homeId;
+//   Favourite.deleteById(homeId, (error) => {
+//     if (error) {
+//       console.log("something went wrong Error ... ");
+//     }
+//   });
+//   res.redirect("/store/favourite-list");
+// };
 
 export const getHomeDetails = (req, res, next) => {
   const homeId = req.params.homeId;

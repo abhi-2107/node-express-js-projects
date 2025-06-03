@@ -17,12 +17,20 @@ export class Favourite {
       }
     });
   }
-
-
-
+  
+  
+  
   static getFavourites(callback) {
     fs.readFile(favouriteDataPath, (err, data) => {
       callback(!err ? JSON.parse(data) : []);
     });
   }
+  
+  static deleteById(homeID, callback){
+    Favourite.getFavourites(homesId => {
+      homesId = homesId.filter(homeId => homesId !== homeID )
+      fs.writeFile(favouriteDataPath, JSON.stringify(homeID), callback);
+  })
+}
+
 }

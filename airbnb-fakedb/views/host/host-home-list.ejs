@@ -21,10 +21,15 @@
                   </svg>
                   <span class="text-gray-700"><%= home.rating %></span>
                 </div>
-              </div>
-              <button class="bg-blue-500 p-2">Edit</button>
-              <button class="bg-red-500 p-2">Delete</button>
-            </div>
+                
+              </div class="inline-flex ">
+                <a href="/host/edit-home/<%= home.id %>?edithome=true" class="bg-blue-500 p-2 inline-block rounded-sm">Edit</a>
+
+                <form action="/host/delete-home/" method="POST" class="inline-block">
+                  <input type="hidden" name="id" value="<%= home.id %>"/>
+                  <button type="submit" class="bg-red-500 p-2 text-white rounded-sm cursor-pointer">Delete</button>
+                </form>
+               </div>
           </div>
         <% }) %>
       </div>
