@@ -1,4 +1,4 @@
-import { Home } from "../models/home.js";
+import { Home } from "../models/Home.js";
 
 export const getAddHome = (req, res, next) => {
   res.render("host/edit-home", {
@@ -9,7 +9,7 @@ export const getAddHome = (req, res, next) => {
 };
 
 export const getHostHomes = (req, res, next) => {
-  Home.fetchAll().then(([registeredHomes]) =>
+  Home.find().then((registeredHomes) =>
     res.render("host/host-home-list", {
       registeredHomes: registeredHomes,
       pageTitle: "Host Homes List",
@@ -22,8 +22,8 @@ export const getEditHome = (req, res, next) => {
   const homeId = req.params.homeId;
   const editing = req.query.edithome === "true";
   Home.findById(homeId)
-    .then(([homes]) => {
-      const home = homes[0];
+    .then((homes) => {
+      const home = homes;
       res.render("host/edit-home", {
         pageTitle: "Edit Home",
         currentPage: "host-homes",
@@ -38,44 +38,43 @@ export const getEditHome = (req, res, next) => {
 };
 
 export const postEditHome = (req, res, next) => {
-  const { houseName, price, location, rating, photoUrl, description, id } =
+  const { id, houseName, price, location, rating, photoUrl, description } =
     req.body;
-  const home = new Home(
-    houseName,
-    description,
-    price,
-    location,
-    rating,
-    photoUrl,
-    id
-  );
-  home
-    .save()
-    .then(() => res.redirect("/host/host-home-list"))
-    .catch((err) => console.log("error on Edit form", err));
+  Home.findById(id)
+    .then((home) => {
+      home.houseName = houseName;
+      home.price = price;
+      home.location = location;
+      home.rating = rating;
+      home.photoUrl = photoUrl;
+      home.description = description;
+      home
+        .save()
+        .then(() => console.log("Home updated successfully"))
+        .catch((err) => console.log("error on Edit form", err));
+      res.redirect("/host/host-home-list");
+    })
+    .catch((err) => console.log("Error fetching home.. " + err));
 };
 
 export const postAddHome = (req, res, next) => {
   const { houseName, description, price, location, rating, photoUrl } =
     req.body;
-  const home = new Home(
+  const home = new Home({
     houseName,
-    description,
     price,
     location,
     rating,
-    photoUrl
-  );
-  home.save();
-  res.render("host/home-added", {
-    pageTitle: "Home Added Successfully",
-    currentPage: "homeAdded",
+    photoUrl,
+    description,
   });
+  home.save().then((result) => console.log(result));
+  res.redirect("/host/host-home-list");
 };
 
 export const postDeleteHome = (req, res, next) => {
-  console.log(req.body);
-  Home.deleteById(req.body.id)
+  console.log(req.body, " <- Deleteing this id");
+  Home.findByIdAndDelete(req.body.id)
     .then(() => res.redirect("/host/host-home-list"))
     .catch((err) => console.log("delete time error" + err));
 };
