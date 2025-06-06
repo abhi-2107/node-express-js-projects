@@ -31,7 +31,7 @@ export const getBookings = (req, res, next) => {
 export const getFavouriteList = (req, res, next) => {
   Favourite.find().then((favourites) => {
     favourites = favourites.map((fav) => fav.houseId.toString());
-    Home.find({_id : favourites}).then((favHomeDetails) => {
+    Home.find({ _id: favourites }).then((favHomeDetails) => {
       res.render("store/favourite-list", {
         favouriteHomes: favHomeDetails,
         pageTitle: "My Favourites",
@@ -41,15 +41,16 @@ export const getFavouriteList = (req, res, next) => {
   });
 };
 
-// export const postDeleteFavourites = (req, res, next) => {
-//   const homeId = req.params.homeId;
-//   Favourite.deleteById(homeId, (error) => {
-//     if (error) {
-//       console.log("something went wrong Error ... ");
-//     }
-//   });
-//   res.redirect("/store/favourite-list");
-// };
+export const postDeleteFavourites = (req, res, next) => {
+  const homeId = req.params.homeId;
+  console.log("Deleting home with ID: ", homeId);
+  Favourite.deleteOne({ houseId: homeId })
+    .then((result) => console.log("Deleted favourite home: ", result))
+    .catch((err) => console.log("Error while deleting favourite home: ", err))
+    .finally(() => {
+      res.redirect("/favourites");
+    });
+};
 
 export const getHomeDetails = (req, res, next) => {
   const homeId = req.params.homeId;
@@ -69,7 +70,7 @@ export const getHomeDetails = (req, res, next) => {
 
 export const postAddFavourite = (req, res, next) => {
   const homeId = req.body.favouriteId;
-  console.log(homeId)
+  console.log(homeId);
   Favourite.findOne({ houseId: homeId })
     .then((fav) => {
       if (fav) {
@@ -77,11 +78,13 @@ export const postAddFavourite = (req, res, next) => {
         return res.redirect("/favourites");
       } else {
         fav = new Favourite({ houseId: homeId });
+        console.log("Adding home to favourites ", fav);
         return fav.save();
       }
     })
     .then((result) => {
-      console.log("Home added to favourites ",result);
+      console.log("Home added to favourites ", result);
       res.redirect("/favourites");
-    }).catch((err) => console.log("Error while adding to favourites" + err));
+    })
+    .catch((err) => console.log("Error while adding to favourites" + err));
 };

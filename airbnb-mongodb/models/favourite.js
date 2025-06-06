@@ -9,4 +9,4 @@ const favouriteSchema = mongoose.Schema({
   },
 });
 
-export const Favourite = new model("Favourite", favouriteSchema);
+export const Favourite =  model("Favourite", favouriteSchema);

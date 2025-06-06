@@ -1,26 +1,5 @@
-// import { getDb } from "../utils/databaseUtils.js";
-
 import mongoose, { model } from "mongoose";
-
-// export class Home {
-//   constructor(houseName, description, price, location, rating, photoUrl, id) {
-// this.houseName = houseName;
-// this.price = parseFloat(price);
-// this.location = location;
-// this.rating = parseFloat(rating);
-// this.photoUrl = photoUrl;
-// this.description = description;
-// this.id = id;
-//   }
-
-//   save() {}
-
-//   static fetch() {}
-
-//   static findById(id) {}
-
-//   static deleteById(id) {}
-// }
+import { Favourite } from "./favourite.js";
 
 const homeSchema = mongoose.Schema({
   houseName: {
@@ -42,5 +21,14 @@ const homeSchema = mongoose.Schema({
   photoUrl: String,
   description: String,
 });
+
+
+homeSchema.pre('findOneAndDelete', async function (next){
+  const homeId = this.getQuery()._id;
+  console.log("Deleting home with ID: ", homeId);
+  await Favourite.deleteMany({ houseId: homeId })
+  next();
+})
+
 
 export const Home = new model("Home", homeSchema);
