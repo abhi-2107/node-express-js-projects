@@ -5,6 +5,7 @@ export const getAddHome = (req, res, next) => {
     pageTitle: "Add Home to airbnb",
     currentPage: "addHome",
     editing: false,
+   isLoggedIn: req.isLoggedIn,
   });
 };
 
@@ -14,6 +15,7 @@ export const getHostHomes = (req, res, next) => {
       registeredHomes: registeredHomes,
       pageTitle: "Host Homes List",
       currentPage: "host-homes",
+     isLoggedIn: req.isLoggedIn,
     })
   );
 };
@@ -29,6 +31,7 @@ export const getEditHome = (req, res, next) => {
         currentPage: "host-homes",
         editing: editing,
         home: home,
+       isLoggedIn: req.isLoggedIn,
       });
     })
     .catch((err) => {

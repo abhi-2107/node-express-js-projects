@@ -1,47 +1,87 @@
-<header class="bg-red-500 text-white p-4 shadow-md">
-  <nav class="container mx-auto flex justify-between items-center">
-    <ul class="flex space-x-4">
+<header class="bg-red-500 text-white shadow-lg">
+  <nav class="container mx-auto flex justify-between items-center py-3 px-4">
+    <!-- Logo -->
+    <a href="/">
+      <div class="flex items-center space-x-2">
+        <svg
+          class="w-8 h-8 text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3l9.5 16.5a2 2 0 01-1.7 3H4.2a2 2 0 01-1.7-3L12 3z"
+          />
+        </svg>
+        <span class="text-2xl font-bold tracking-wide">airbnb</span>
+      </div>
+    </a>
+    <!-- Navigation Links -->
+    <ul class="flex items-center space-x-2 md:space-x-4 font-medium">
+      <% if(isLoggedIn) { %>
       <li>
         <a
           href="/"
-          class="<%= currentPage === 'index' ? 'bg-red-400' : 'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >airbnb</a
+          class="py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-white <%= currentPage === 'index' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Home</a
         >
       </li>
       <li>
         <a
           href="/homes"
-          class="<%= currentPage === 'Home' ? 'bg-red-400' : 'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >Homes-List</a
+          class="py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-white <%= currentPage === 'Home' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Homes List</a
         >
       </li>
       <li>
         <a
           href="/favourites"
-          class="<%= currentPage === 'favourites' ? 'bg-red-400' : 'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
+          class="py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-white <%= currentPage === 'favourites' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
           >Favourites</a
         >
       </li>
       <li>
         <a
           href="/bookings"
-          class="<%= currentPage === 'bookings' ? 'bg-red-400' : 'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
+          class="py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-white <%= currentPage === 'bookings' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
           >Bookings</a
         >
       </li>
       <li>
         <a
           href="/host/host-home-list"
-          class="<%= currentPage === 'host-homes' ? 'bg-red-400' : 'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
+          class="py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-white <%= currentPage === 'host-homes' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
           >Host Homes</a
         >
       </li>
       <li>
         <a
           href="/host/add-home"
-          class="<%= currentPage === 'addHome' ? 'bg-red-400' : 'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
+          class="py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-white <%= currentPage === 'addHome' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
           >Add Home</a
         >
+      </li>
+      <% }%>
+      <li>
+        <%  if(isLoggedIn) { %>
+        <form action="/logout" method="POST" class="inline">
+          <button
+            type="submit"
+            class="py-2 px-4 rounded-lg bg-white text-red-500 shadow hover:bg-gray-100 transition duration-200 focus:outline-none focus:ring-2 focus:ring-white"
+          >
+            Logout
+          </button>
+        </form>
+        <% } else { %>
+        <a
+          href="/login"
+          class="py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-white <%= currentPage === 'login' ? 'bg-white text-red-500 shadow' : 'hover:bg-white hover:text-red-500' %>"
+          >Login</a
+        >
+        <% } %>
       </li>
     </ul>
   </nav>

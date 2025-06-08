@@ -5,6 +5,7 @@ import { pageNotFound } from "./controllers/errorController.js";
 import { storeRouter } from "./routes/storeRouter.js";
 import { rootDir } from "./utils/pathUtils.js";
 import mongoose from "mongoose";
+import authRouter from "./routes/authRouter.js";
 
 const port = 3000;
 
@@ -20,10 +21,31 @@ app.use(urlencoded());
 
 app.use(express.static(path.join(rootDir, "public")));
 
-// all the routes defined in hostRouter are prefixed with /host
+// cookie parser middleware , it parses cookies from request header
 
+app.use((req, res, next) => {
+    console.log("cookie: ", req.get("Cookie"));
+    req.isLoggedIn = req.get("Cookie")
+      ? req.get("Cookie").includes("isLoggedIn=true")
+    : false;
+  console.log("isLoggedIn: ", req.isLoggedIn);
+  next();
+});
+
+app.use(authRouter);
 app.use(storeRouter);
 
+
+// for cookie parser, checks if user is logged in or not on host routes
+app.use("/host", (req, res, next) => {
+  if (req.isLoggedIn) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+});
+
+// all the routes defined in hostRouter are prefixed with /host
 app.use("/host", hostRouter);
 
 app.use(pageNotFound);
@@ -35,7 +57,7 @@ mongoose
   .connect(DB_PATH)
   .then(() => {
     app.listen(port, () => {
-      console.log('Connected to mongoDb ...')
+      console.log("Connected to mongoDb ...");
       console.log(`server running at https://localhost:${port}`);
     });
   })
